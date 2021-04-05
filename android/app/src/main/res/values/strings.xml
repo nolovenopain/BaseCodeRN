@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">C2G5_New</string>
+    <string name="default_notification_channel_id" translatable="false">insider</string>
+</resources>
