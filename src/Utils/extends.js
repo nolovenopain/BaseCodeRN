@@ -1,4 +1,4 @@
-import { toggleLoading as toggleLoadingRND } from "../Redux/Action/globalAction";
+import { checkInternetConnection, toggleLoading as toggleLoadingRND } from "../Redux/Action/globalAction";
 import store from '../Redux/Store/store';
 // import { constants } from "./constants";
 
@@ -8,6 +8,10 @@ export const sleep = (ms) => {
 
 export const toggleLoading = (flag) => {
     store.dispatch(toggleLoadingRND(flag));
+}
+
+export const updateInternetStatus = bool => {
+    store.dispatch(checkInternetConnection(bool))
 }
 
 // export function DropDownAlert(mess, type, header) {

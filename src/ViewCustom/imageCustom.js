@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Image as ImageRN, StyleSheet, View } from 'react-native';
-import { images, URL } from '../Constants/index';
+import { images } from '../Constants/index';
 import FastImage from 'react-native-fast-image';
+import Config from "react-native-config";
 
 export default class ImageCus extends Component {
     static genericUri = (uri) => {
@@ -9,7 +10,7 @@ export default class ImageCus extends Component {
         //     if (uri.startsWith('/')) {
         //         uri = uri.replace('/', '');
         //     }
-        //     uri = URL.API_BASE_URL_RELEASE + uri;
+        //     uri = Config.DEV_BASE_URL + uri;
         // }
         return uri;
     }
@@ -20,8 +21,8 @@ export default class ImageCus extends Component {
         this.state = {
             isLoaded: false,
             isError: false,
-            width: 0,
-            height: 0,
+            width: 60,
+            height: 60,
         }
     }
 
@@ -39,24 +40,25 @@ export default class ImageCus extends Component {
             else if(this.source.uri.constructor == String) {
                 var uri = ImageCus.genericUri(this.source.uri)
 
-                ImageRN.prefetch(uri).then(status => {
-                    if(this.props.autoHeight) {
+                ImageRN.prefetch(uri).then((status) => {
+                    if (this.props.autoHeight) {
                         ImageRN.getSize(uri, (w, h) => {
-                            this.setState({
-                                isLoaded: status,
-                                isError: false,
-                                with: w,
-                                height: h
+                            console.log(w, h);
+                            this.setState({ 
+                                isLoaded: status, 
+                                isError: false, 
+                                width: w, 
+                                height: h 
                             })
-                        }) 
+                        });
                     }
                     else {
-                        this.setState({
-                            isLoaded: status,
-                            isError: false,
+                        this.setState({ 
+                            isLoaded: status, 
+                            isError: false 
                         })
                     }
-                }, error => {
+                }, (error) => {
                     this.setState({ isError: true })
                 })
             }
@@ -67,7 +69,7 @@ export default class ImageCus extends Component {
 
     render() {
         var style = StyleSheet.flatten(this.props.style)
-        var { autoHeight } = this.props;
+        var { size, color } = this.props;
 
         return (
             this.state.isError ?
@@ -83,9 +85,11 @@ export default class ImageCus extends Component {
                         style={{
                             width: style.width,
                             height: style.height,
+                            justifyContent: 'center',
+                            alignItems: 'center',
                         }}
                     >
-                        <ActivityIndicator color='#ccc'/>
+                        <ActivityIndicator color={color ? color : 'rgba(0,0,0,0.4)'} size={size ? size : 'small'} />
                     </View>
                         :
                     <FastImage

@@ -9,7 +9,6 @@ import { Ionicons } from './iconCustom';
 export default class TextInputCus extends React.Component {
     constructor(props) {
         super(props)
-
         this.state = {
             value: this.props.value,
             required: false,
@@ -17,7 +16,7 @@ export default class TextInputCus extends React.Component {
         }
     }
 
-    componentDidMount() { 
+    componentDidMount() {
         this.props.onRef ? this.props.onRef(this) : null
     }
     
@@ -68,8 +67,7 @@ export default class TextInputCus extends React.Component {
                             padding: 5,
                             borderColor: '#ccc',
                             borderWidth: this.props.borderWidth ? 1 : 0,
-                            paddingLeft: 8,
-                            paddingRight: 8,
+                            paddingHorizontal: 8,
                             flexDirection: 'row',
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -93,7 +91,7 @@ export default class TextInputCus extends React.Component {
                     }
                     <TextInputRN
                         {...this.props}
-                        ref={input => { this.textInput = input }}
+                        ref={input => this.textInput = input}
                         placeholder={
                             this.props.placeholder ? translate(this.props.placeholder, this.props.language) : ''
                         }
@@ -119,7 +117,7 @@ export default class TextInputCus extends React.Component {
                         blurOnSubmit={this.props.nextInput ? false : true}
                     />
                     {
-                        this.state.value && this.state.value.trim() != '' && !this.props.multiline ?
+                        this.state.value && this.state.value.trim() != '' && !this.props.multiline && (this.props.editable === undefined || this.props.editable === true) ?
                         <ButtonCus
                             style={{
                                 backgroundColor: color.transparent,

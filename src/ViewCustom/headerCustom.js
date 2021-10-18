@@ -152,5 +152,6 @@ HeaderCus.defaultProps = {
 }
 
 HeaderCus = withNavigation(connect(state => ({
-    language: state.settings.language
+    language: state.settings.language,
+    user: state.user
 }))(HeaderCus))

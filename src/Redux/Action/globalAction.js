@@ -6,14 +6,16 @@ export const forceUpdateGlobal = (obj, isSaveLocalStore) => {
         isSaveLocalStore 
     };
 }
-export const toggleLoading = (flag) => { 
+
+export const toggleLoading = (flag, loadingTitle) => { 
     return { 
         type: 'toggleLoading', 
-        flag 
+        flag,
+        loadingTitle
     };
 }
 
-export const checkInternetConnection = (status) => {
+export const checkInternetConnection = status => { 
     return { 
         type: 'checkInternetConnection', 
         status 

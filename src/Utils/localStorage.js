@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { defaultState as defaultStateUser } from '../Redux/Reducers/userReducer';
-import { defaultState as defaultStateSettings } from '../Redux/Reducers/settingsReducer';
+import { defaultStateUser } from '../Redux/Reducers/userReducer';
+import { defaultStateSettings } from '../Redux/Reducers/settingsReducer';
 
 const SETTINGS = 'SETTINGS';
 const USER_SAVED = 'USER_SAVED';
 const FCM_TOKEN = 'FCM_TOKEN';
+const DEVICE_INFO = 'DEVICE_INFO';
 
 var LocalStorage = {
     getItems: async function (keys) {
@@ -47,16 +48,46 @@ var LocalStorage = {
     getUserSaved: async (callback) => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItem(USER_SAVED, '{}')
-                .then(value => {
+                .then(value => { 
                     var userSaved = {
                         ...defaultStateUser,
                         ...(JSON.parse(value))
                     };  
-                    (callback || resolve)(userSaved);
-            });
+                    (callback || resolve)(userSaved)
+                });
         })
     },
-    setSettings:(obj) => {
+    setDeviceToken: (token) => {
+        LocalStorage.setItem(FCM_TOKEN, token || '')
+    },
+    getDeviceToken: async(callback) => {
+        return new Promise((resolve, reject) => {
+            LocalStorage.getItem(FCM_TOKEN, '')
+                .then(value => {
+                    (callback || resolve)(value);
+                });
+        })
+    },
+    setDeviceInfo: (obj) => {
+        LocalStorage.setItem(DEVICE_INFO, JSON.stringify(obj))
+            .then(value => {
+                if (callback)
+                    callback(value);
+            });
+    },
+    getDeviceInfo: async(callback) => {
+        return new Promise((resolve, reject) => {
+            LocalStorage.getItem(DEVICE_INFO, '{}')
+                .then(value => {
+                    var deviceInfo = {
+                        ...{},
+                        ...(JSON.parse(value))
+                    };
+                    (callback || resolve)(deviceInfo);
+                });
+        })
+    },
+    setSettings: (obj) => {
         LocalStorage.setItem(SETTINGS, JSON.stringify(obj))
             .then(value => {
                 if (callback)
@@ -75,7 +106,7 @@ var LocalStorage = {
                 });
         })
     },
-    getDataSave: async (callback) => {
+    getDataSave: async(callback) => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItems([
                 {

@@ -1,19 +1,20 @@
 import LocalStorage from '../../Utils/localStorage';
 
-export let defaultState = {
+export let defaultStateSettings = {
     "language": 'viVN',
 }
 
-export default settingsReducer = (state = defaultState, action) => {
+export default settingsReducer = (state = defaultStateSettings, action) => {
     switch (action.type) {
         case 'forceUpdateSettings': 
-            if(action.flagSave) {
-                LocalStorage.setSettings(state);
-            }
-            return {
+            var _state = {
                 ...state,
                 ...(action.obj || {})
             }
+            if(action.flagSave) {
+                LocalStorage.setSettings(_state);
+            }
+            return _state
         default:
             return state
     }

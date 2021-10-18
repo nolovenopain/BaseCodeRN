@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text as TextRN, StyleSheet } from 'react-native';
+import { Text as TextRN, StyleSheet, Platform } from 'react-native';
 import { translate } from '../Language/index';
 import { connect } from 'react-redux';
 
 export default class TextCus extends React.PureComponent {
     static FontCustom = {
-        'Arial': Platform.select({
+        Arial: Platform.select({
             android: 'arial',
             ios: 'arial'
         }),
@@ -57,51 +57,51 @@ export default class TextCus extends React.PureComponent {
             android: 'Roboto-ThinItalic',
             ios: 'Roboto-ThinItalic'
         }),
-        'ProximaNovaLg_Black': Platform.select({
+        ProximaNovaLg_Black: Platform.select({
             android: 'ProximaNovaLg_Black',
             ios: 'ProximaNova-Black'
         }),
-        'ProximaNovaLg_BlackItalic': Platform.select({
+        ProximaNovaLg_BlackItalic: Platform.select({
             android: 'ProximaNovaLg_BlackItalic',
             ios: 'ProximaNova-BlackIt'
         }),
-        'ProximaNovaLg_Bold_Italic': Platform.select({
+        ProximaNovaLg_Bold_Italic: Platform.select({
             android: 'ProximaNovaLg_Bold_Italic',
             ios: 'ProximaNova-BoldIt'
         }),
-        'ProximaNovaLg_Bold': Platform.select({
+        ProximaNovaLg_Bold: Platform.select({
             android: 'ProximaNovaLg_Bold',
             ios: 'ProximaNova-Bold'
         }),
-        'ProximaNovaLg_Light_Italic': Platform.select({
+        ProximaNovaLg_Light_Italic: Platform.select({
             android: 'ProximaNovaLg_Light_Italic',
             ios: 'ProximaNova-LightIt'
         }),
-        'ProximaNovaLg_Light': Platform.select({
+        ProximaNovaLg_Light: Platform.select({
             android: 'ProximaNovaLg_Light',
             ios: 'ProximaNova-Light'
         }),
-        'ProximaNovaLg_Regular_Italic': Platform.select({
+        ProximaNovaLg_Regular_Italic: Platform.select({
             android: 'ProximaNovaLg_Regular_Italic',
             ios: 'ProximaNova-RegularIt'
         }),
-        'ProximaNovaLg_Regular': Platform.select({
+        ProximaNovaLg_Regular: Platform.select({
             android: 'ProximaNovaLg_Regular',
             ios: 'ProximaNova-Regular'
         }),
-        'ProximaNovaLg_Semibold_Italic': Platform.select({
+        ProximaNovaLg_Semibold_Italic: Platform.select({
             android: 'ProximaNovaLg_Semibold_Italic',
             ios: 'ProximaNova-SemiboldIt'
         }),
-        'ProximaNovaLg_Semibold': Platform.select({
+        ProximaNovaLg_Semibold: Platform.select({
             android: 'ProximaNovaLg_Semibold',
             ios: 'ProximaNova-Semibold'
         }),
-        'ProximaNovaLg_Thin_Italic': Platform.select({
+        ProximaNovaLg_Thin_Italic: Platform.select({
             android: 'ProximaNovaLg_Thin_Italic',
             ios: 'ProximaNova-ThinIt'
         }),
-        'ProximaNovaLg_Thin': Platform.select({
+        ProximaNovaLg_Thin: Platform.select({
             android: 'ProximaNovaLg_Thin',
             ios: 'ProximaNovaT-Thin'
         }),
