@@ -50,7 +50,7 @@ export default class RootComponent extends Component {
     }
      
  
-     render() { console.log(console.log(!store.getState().global.isLoading))
+     render() {
          return (
              <>
                 <AppNavigation/>

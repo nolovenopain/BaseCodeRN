@@ -1,7 +1,7 @@
 import LocalStorage from '../../Utils/localStorage';
 
 export let defaultStateSettings = {
-    "language": 'viVN',
+    language: 'vi',
 }
 
 export default settingsReducer = (state = defaultStateSettings, action) => {
@@ -9,7 +9,7 @@ export default settingsReducer = (state = defaultStateSettings, action) => {
         case 'forceUpdateSettings': 
             var _state = {
                 ...state,
-                ...(action.obj || {})
+                language: action.lang
             }
             if(action.flagSave) {
                 LocalStorage.setSettings(_state);

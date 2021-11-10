@@ -38,14 +38,13 @@ var LocalStorage = {
     removeItem: async function (key) {
         return await AsyncStorage.removeItem(key);
     },
-    setUserSaved: (obj, callback) => {
+    setUserSaved: (obj) => {
         LocalStorage.setItem(USER_SAVED, JSON.stringify(obj || defaultStateUser))
             .then(value => {
-                if (callback)
-                    callback(value);
+                console.log(value);
             });
     },
-    getUserSaved: async (callback) => {
+    getUserSaved: async () => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItem(USER_SAVED, '{}')
                 .then(value => { 
@@ -53,29 +52,28 @@ var LocalStorage = {
                         ...defaultStateUser,
                         ...(JSON.parse(value))
                     };  
-                    (callback || resolve)(userSaved)
+                    resolve(userSaved)
                 });
         })
     },
     setDeviceToken: (token) => {
         LocalStorage.setItem(FCM_TOKEN, token || '')
     },
-    getDeviceToken: async(callback) => {
+    getDeviceToken: async() => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItem(FCM_TOKEN, '')
                 .then(value => {
-                    (callback || resolve)(value);
+                    resolve(value);
                 });
         })
     },
-    setDeviceInfo: (obj) => {
+    setDeviceInfo: () => {
         LocalStorage.setItem(DEVICE_INFO, JSON.stringify(obj))
             .then(value => {
-                if (callback)
-                    callback(value);
+                console.log(value);
             });
     },
-    getDeviceInfo: async(callback) => {
+    getDeviceInfo: async() => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItem(DEVICE_INFO, '{}')
                 .then(value => {
@@ -83,18 +81,17 @@ var LocalStorage = {
                         ...{},
                         ...(JSON.parse(value))
                     };
-                    (callback || resolve)(deviceInfo);
+                    resolve(deviceInfo);
                 });
         })
     },
     setSettings: (obj) => {
         LocalStorage.setItem(SETTINGS, JSON.stringify(obj))
             .then(value => {
-                if (callback)
-                    callback(value);
+                console.log(obj);
             });
     },
-    getSettings: async(callback) => {
+    getSettings: async() => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItem(SETTINGS, '{}')
                 .then(value => {
@@ -102,11 +99,11 @@ var LocalStorage = {
                         ...defaultStateSettings,
                         ...(JSON.parse(value))
                     };
-                    (callback || resolve)(settings);
+                    resolve(settings);
                 });
         })
     },
-    getDataSave: async(callback) => {
+    getDataSave: async() => {
         return new Promise((resolve, reject) => {
             LocalStorage.getItems([
                 {
@@ -126,7 +123,7 @@ var LocalStorage = {
                     ...defaultStateSettings,
                     ...(JSON.parse(data[SETTINGS]))
                 };
-                (callback || resolve)({
+                resolve({
                     userSaved,
                     settings,
                 });

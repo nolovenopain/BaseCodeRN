@@ -1,20 +1,13 @@
-import viVN  from './vi-VN'
-import enUS  from './en-US'
+import vi  from './vi-VN'
+import en  from './en-US'
+import I18n from 'react-native-i18n';
 
-let language = {
-    viVN,
-    enUS
-}
+I18n.translations = {
+    vi,
+    en
+};
 
-export default language;
-
-export let translate = (keys, locate) => {
-    locate = (locate == null ? 'viVN' : locate);
-    keys = keys.split('.');
-    var translate = language[locate];
-    while (keys.length > 0 && translate != null) {
-        translate = translate[keys[0]];
-        keys.splice(0, 1);
-    }
-    return translate;
+export const translate = (str, language) => {
+    I18n.locale = language
+    return I18n.t(str)
 }

@@ -1,8 +1,8 @@
-export const forceUpdateSettings = (obj, flagSave) => {
+export const forceUpdateSettings = (lang, flagSave) => {
     flagSave = flagSave == null ? false : flagSave;
     return { 
         type: 'forceUpdateSettings', 
-        obj, 
+        lang, 
         flagSave 
     };
 }
